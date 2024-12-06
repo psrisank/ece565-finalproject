@@ -47,7 +47,7 @@ from m5.objects import *
 # specific instantiations.
 
 class L1Cache(Cache):
-    assoc = 2
+    assoc = 8
     tag_latency = 2
     data_latency = 2
     response_latency = 2
@@ -55,14 +55,16 @@ class L1Cache(Cache):
     tgts_per_mshr = 20
 
 class L1_ICache(L1Cache):
+    size = '64kB'
     is_read_only = True
     # Writeback clean lines as well
     writeback_clean = True
 
 class L1_DCache(L1Cache):
-    pass
+    size = '32kB'
 
 class L2Cache(Cache):
+    size = '256kB'
     assoc = 8
     tag_latency = 20
     data_latency = 20

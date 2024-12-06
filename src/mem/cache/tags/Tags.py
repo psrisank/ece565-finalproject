@@ -65,7 +65,7 @@ class BaseTags(ClockedObject):
         "Whether to access tags and data sequentially")
 
     # Get indexing policy
-    indexing_policy = Param.BaseIndexingPolicy(SetAssociative(),
+    indexing_policy = Param.BaseIndexingPolicy(SkewedAssociative(),
         "Indexing policy")
 
     # Set the indexing entry size as the block size
@@ -128,3 +128,16 @@ class FALRU(BaseTags):
 
     # This tag uses its own embedded indexing
     indexing_policy = NULL
+
+
+class ZcacheTag(BaseTags):
+    type = 'ZcacheTag'
+    cxx_header = "mem/cache/tags/zcache_tag.hh"
+    cxx_class = 'gem5::ZcacheTag'
+
+    # Get the cache associativity
+    assoc = Param.Int(Parent.assoc, "associativity")
+
+    # Get replacement policy from the parent (cache)
+    replacement_policy = Param.BaseReplacementPolicy(
+        Parent.replacement_policy, "Replacement policy")

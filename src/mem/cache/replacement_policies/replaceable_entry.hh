@@ -72,6 +72,8 @@ class ReplaceableEntry
      * Way (relative position within the set) to which this entry belongs.
      */
     uint32_t _way;
+    int _parentSet;
+    int _parentWay;
 
   public:
     ReplaceableEntry() = default;
@@ -96,6 +98,13 @@ class ReplaceableEntry
         _way = way;
     }
 
+    virtual void
+    setParent(const int parentSet, const int parentWay)
+    {
+        _parentSet = parentSet;
+        _parentWay = parentWay;
+    }
+
     /**
      * Get set number.
      *
@@ -109,6 +118,8 @@ class ReplaceableEntry
      * @return The way to which this entry belongs.
      */
     uint32_t getWay() const { return _way; }
+    int getParentSet() const { return _parentSet; }
+    int getParentWay() const { return _parentWay; }
 
     /**
      * Prints relevant information about this entry.
@@ -118,7 +129,7 @@ class ReplaceableEntry
     virtual std::string
     print() const
     {
-        return csprintf("set: %#x way: %#x", getSet(), getWay());
+        return csprintf("set: %#x way: %#x parent: %#x", getSet(), getWay());
     }
 };
 

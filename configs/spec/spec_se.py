@@ -131,6 +131,8 @@ parser.add_argument("-b", "--benchmark", default="",
 
 
 args = parser.parse_args()
+print("Arguments found!!!\n")
+print(args)
 
 # for glibcxx_3.4.20 and libgfotran.5.so
 args.redirects = ['/lib64=/package/gcc/8.3.0/lib64']
