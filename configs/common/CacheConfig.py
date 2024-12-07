@@ -120,8 +120,8 @@ def config_cache(options, system):
         # same clock as the CPUs.
         # system.l2 = l2_cache_class(clk_domain=system.cpu_clk_domain,
                                 #    **_get_cache_opts('l2', options))
-        # system.l2 = l2_cache_class(clk_domain=system.cpu_clk_domain, tags=ZcacheTag(indexing_policy=ZcacheAssociative()), **_get_cache_opts('l2', options))
-        system.l2 = l2_cache_class(clk_domain=system.cpu_clk_domain, tags=BaseSetAssoc(indexing_policy=SkewedAssociative()), **_get_cache_opts('l2', options))
+        system.l2 = l2_cache_class(clk_domain=system.cpu_clk_domain, tags=BaseSetAssoc(indexing_policy=Zcache()), **_get_cache_opts('l2', options))
+        # system.l2 = l2_cache_class(clk_domain=system.cpu_clk_domain, tags=BaseSetAssoc(indexing_policy=SkewedAssociative()), **_get_cache_opts('l2', options))
 
         system.tol2bus = L2XBar(clk_domain = system.cpu_clk_domain)
         system.l2.cpu_side = system.tol2bus.mem_side_ports

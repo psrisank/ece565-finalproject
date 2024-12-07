@@ -31,13 +31,13 @@
  * Declaration of a skewed associative indexing policy.
  */
 
-#ifndef __MEM_CACHE_INDEXING_POLICIES_ZCACHE_ASSOCIATIVE_HH__
-#define __MEM_CACHE_INDEXING_POLICIES_ZCACHE_ASSOCIATIVE_HH__
+#ifndef __MEM_CACHE_INDEXING_POLICIES_ZCACHE_HH__
+#define __MEM_CACHE_INDEXING_POLICIES_ZCACHE_HH__
 
 #include <vector>
 
 #include "mem/cache/tags/indexing_policies/base.hh"
-#include "params/ZcacheAssociative.hh"
+#include "params/Zcache.hh"
 
 namespace gem5
 {
@@ -69,7 +69,7 @@ class ReplaceableEntry;
  * If provided with an associativity higher than the number of skewing
  * functions, the skewing functions of the extra ways might be sub-optimal.
  */
-class ZcacheAssociative : public BaseIndexingPolicy
+class Zcache : public BaseIndexingPolicy
 {
   private:
     /**
@@ -140,19 +140,17 @@ class ZcacheAssociative : public BaseIndexingPolicy
 
   public:
     /** Convenience typedef. */
-     typedef ZcacheAssociativeParams Params;
+     typedef ZcacheParams Params;
 
     /**
      * Construct and initialize this policy.
      */
-    ZcacheAssociative(const Params &p);
+    Zcache(const Params &p);
 
     /**
      * Destructor.
      */
-    ~ZcacheAssociative() {};
-
-    // void setParent(ReplaceableEntry* entry);
+    ~Zcache() {};
 
     /**
      * Find all possible entries for insertion and replacement of an address.
@@ -175,9 +173,8 @@ class ZcacheAssociative : public BaseIndexingPolicy
      */
     Addr regenerateAddr(const Addr tag, const ReplaceableEntry* entry) const
                                                                    override;
-
 };
 
 } // namespace gem5
 
-#endif //__MEM_CACHE_INDEXING_POLICIES_SKEWED_ASSOCIATIVE_HH__
+#endif //__MEM_CACHE_INDEXING_POLICIES_ZCACHE_HH__

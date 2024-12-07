@@ -31,17 +31,19 @@
  * Definitions of a skewed associative indexing policy.
  */
 
-#include "mem/cache/tags/indexing_policies/zcache_associative.hh"
+#include "mem/cache/tags/indexing_policies/zcache.hh"
 
 #include "base/bitfield.hh"
 #include "base/intmath.hh"
 #include "base/logging.hh"
 #include "mem/cache/replacement_policies/replaceable_entry.hh"
+#include "base/trace.hh"
+#include "debug/Zcache.hh"
 
 namespace gem5
 {
 
-ZcacheAssociative::ZcacheAssociative(const Params &p)
+Zcache::Zcache(const Params &p)
     : BaseIndexingPolicy(p), msbShift(floorLog2(numSets) - 1)
 {
     if (assoc > NUM_SKEWING_FUNCTIONS) {
@@ -60,7 +62,7 @@ ZcacheAssociative::ZcacheAssociative(const Params &p)
 }
 
 Addr
-ZcacheAssociative::hash(const Addr addr) const
+Zcache::hash(const Addr addr) const
 {
     // Get relevant bits
     const uint8_t lsb = bits<Addr>(addr, 0);
@@ -72,7 +74,7 @@ ZcacheAssociative::hash(const Addr addr) const
 }
 
 Addr
-ZcacheAssociative::dehash(const Addr addr) const
+Zcache::dehash(const Addr addr) const
 {
     // Get relevant bits. The original MSB is one bit away on the current MSB
     // (which is the XOR bit). The original LSB can be retrieved from inverting
@@ -87,12 +89,12 @@ ZcacheAssociative::dehash(const Addr addr) const
 }
 
 Addr
-ZcacheAssociative::skew(const Addr addr, const uint32_t way) const
+Zcache::skew(const Addr addr, const uint32_t way) const
 {
     // Assume an address of size A bits can be decomposed into
     // {addr3, addr2, addr1, addr0}, where:
     //   addr0 (M bits) = Block offset;
-    //   addr1 (N bits) = Set bits in conventional cache; // AKA idx Bits
+    //   addr1 (N bits) = Set bits in conventional cache;
     //   addr3 (A - M - 2*N bits), addr2 (N bits) = Tag bits.
     // We use addr1 and addr2, as proposed in the original paper
     Addr addr1 = bits<Addr>(addr, msbShift, 0);
@@ -139,7 +141,7 @@ ZcacheAssociative::skew(const Addr addr, const uint32_t way) const
 }
 
 Addr
-ZcacheAssociative::deskew(const Addr addr, const uint32_t way) const
+Zcache::deskew(const Addr addr, const uint32_t way) const
 {
     // Get relevant bits of the addr
     Addr addr1 = bits<Addr>(addr, msbShift, 0);
@@ -192,13 +194,13 @@ ZcacheAssociative::deskew(const Addr addr, const uint32_t way) const
 }
 
 uint32_t
-ZcacheAssociative::extractSet(const Addr addr, const uint32_t way) const
+Zcache::extractSet(const Addr addr, const uint32_t way) const
 {
     return skew(addr >> setShift, way) & setMask;
 }
 
 Addr
-ZcacheAssociative::regenerateAddr(const Addr tag,
+Zcache::regenerateAddr(const Addr tag,
                                   const ReplaceableEntry* entry) const
 {
     const Addr addr_set = (tag << (msbShift + 1)) | entry->getSet();
@@ -207,58 +209,17 @@ ZcacheAssociative::regenerateAddr(const Addr tag,
 }
 
 std::vector<ReplaceableEntry*>
-ZcacheAssociative::getPossibleEntries(const Addr addr) const
+Zcache::getPossibleEntries(const Addr addr) const
 {
     std::vector<ReplaceableEntry*> entries;
-    std::vector<ReplaceableEntry*> temp_entry_array;
-    std::vector<Addr> temp_addr_array;
-    Addr temp_addr;
-    ReplaceableEntry* temp;
-    uint32_t temp_set;
-    uint32_t temp_way;
-
+    DPRINTF(Zcache, "Get Possible Entries was called.\n");
     // Parse all ways
     for (uint32_t way = 0; way < assoc; ++way) {
         // Apply hash to get set, and get way entry in it
-        //idk what setShift does so will not use extractSet?
-        //i want to override the base setEntry() and getEntry() func so i can incorporate parent - figured way around i think
-        //imma use skew
-        temp_addr_array.push_back(skew(addr, way)); //myway
-
-        //temp_array.push_back(sets[extractSet(addr, way)][way]);
-        temp = sets[extractSet(addr, way)][way];
-         //NEED TO GET SET of the addr being passed into this function(preHashing)
-        //entries.push_back(sets[extractSet(addr, way)][way]);
-        temp_entry_array.push_back(temp);
-        entries.push_back(temp);
-
-
+        entries.push_back(sets[extractSet(addr, way)][way]);
     }
-    for (uint32_t way = 0; way < assoc; ++way) {
-      temp_addr = temp_addr_array[way];
-      temp_set = temp_entry_array[way]->getSet();
-      temp_way = temp_entry_array[way]->getWay();
-
-      for (uint32_t level_2 = 0; level_2 < assoc; ++level_2) {
-        if (temp_way == level_2) {
-          continue;
-        }
-
-        temp = sets[extractSet(temp_addr, level_2)][level_2];
-        temp->setParent(temp_set, temp_way);
-        entries.push_back(temp);
-
-        }
-
-    }
-
-
 
     return entries;
 }
-
-// void setParent(ReplaceableEntry* entry) {
-//   entry->setParent(-1,-1);
-// }
 
 } // namespace gem5

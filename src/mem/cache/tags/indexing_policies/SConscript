@@ -28,9 +28,10 @@
 Import('*')
 
 SimObject('IndexingPolicies.py', sim_objects=[
-    'BaseIndexingPolicy', 'SetAssociative', 'SkewedAssociative', 'ZcacheAssociative'])
+    'BaseIndexingPolicy', 'SetAssociative', 'SkewedAssociative', 'Zcache'])
 
 Source('base.cc')
 Source('set_associative.cc')
 Source('skewed_associative.cc')
-Source('zcache_associative.cc')
+# Source('zcache_associative.cc')
+Source('zcache.cc')
