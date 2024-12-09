@@ -38,6 +38,7 @@
 
 #include "mem/cache/tags/indexing_policies/base.hh"
 #include "params/ZcacheAssociative.hh"
+#include "mem/cache/cache_blk.hh"
 
 namespace gem5
 {

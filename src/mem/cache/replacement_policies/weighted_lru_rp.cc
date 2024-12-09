@@ -91,6 +91,18 @@ WeightedLRU::getVictim(const ReplacementCandidates& candidates) const
     return victim;
 }
 
+CacheBlk*
+WeightedLRU::ZgetVictim(const std::vector<CacheBlk*> candidates) const
+{
+    // There must be at least one replacement candidate
+    
+    // Visit all candidates to find victim
+    
+
+    return nullptr;
+}
+
+
 std::shared_ptr<ReplacementData>
 WeightedLRU::instantiateEntry()
 {

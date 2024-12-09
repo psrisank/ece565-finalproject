@@ -66,6 +66,16 @@ SecondChance::invalidate(
         replacement_data)->hasSecondChance = false;
 }
 
+CacheBlk*
+SecondChance::ZgetVictim(const std::vector<CacheBlk*> candidates) const
+{
+    // There must be at least one replacement candidate
+    
+    // Visit all candidates to find victim
+    return nullptr;
+}
+
+
 void
 SecondChance::touch(
     const std::shared_ptr<ReplacementData>& replacement_data) const

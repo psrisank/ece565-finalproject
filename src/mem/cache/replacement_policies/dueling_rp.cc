@@ -106,6 +106,16 @@ Dueling::reset(const std::shared_ptr<ReplacementData>& replacement_data) const
     duelingMonitor.sample(static_cast<Dueler*>(casted_replacement_data.get()));
 }
 
+CacheBlk*
+Dueling::ZgetVictim(const std::vector<CacheBlk*> candidates) const
+{
+    // There must be at least one replacement candidate
+    
+    // Visit all candidates to find victim
+    return nullptr;
+}
+
+
 ReplaceableEntry*
 Dueling::getVictim(const ReplacementCandidates& candidates) const
 {

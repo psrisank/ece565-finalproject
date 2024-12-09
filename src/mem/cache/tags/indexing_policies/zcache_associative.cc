@@ -210,53 +210,94 @@ std::vector<ReplaceableEntry*>
 ZcacheAssociative::getPossibleEntries(const Addr addr) const
 {
     std::vector<ReplaceableEntry*> entries;
-    std::vector<ReplaceableEntry*> temp_entry_array;
-    std::vector<Addr> temp_addr_array;
-    Addr temp_addr;
-    ReplaceableEntry* temp;
-    uint32_t temp_set;
-    uint32_t temp_way;
 
     // Parse all ways
     for (uint32_t way = 0; way < assoc; ++way) {
         // Apply hash to get set, and get way entry in it
-        //idk what setShift does so will not use extractSet?
-        //i want to override the base setEntry() and getEntry() func so i can incorporate parent - figured way around i think
-        //imma use skew
-        temp_addr_array.push_back(skew(addr, way)); //myway
+        entries.push_back(sets[extractSet(addr, way)][way]);
+    }
 
-        //temp_array.push_back(sets[extractSet(addr, way)][way]);
+    return entries;
+}
+
+
+/*
+std::vector<ReplaceableEntry*>
+ZcacheAssociative::getPossibleEntries(const Addr addr) const
+{
+  std::vector<ReplaceableEntry*> entries;
+  std::vector<ReplaceableEntry*> entries2ndlevel;
+  for (uint32_t way = 0; way < assoc; ++way) {
+    entries.push_back(sets[extractSet(addr, way)][way]);
+  }
+
+for (const auto& entry : entries) {
+  for (uint32_t way = 0; way < assoc; ++way) {
+    uint32_t set = extractSet(regenerateAddr(0, entry), way);
+    entries2ndlevel.push_back(sets[set][way]);
+ }
+}
+
+  vec1.insert(vec1.end(), vec2.begin(), vec2.end());
+ return entries;
+
+}
+
+
+*/
+
+/*
+std::vector<ReplaceableEntry*>
+ZcacheAssociative::getPossibleEntries(const Addr addr) const
+{
+    std::vector<ReplaceableEntry*> entries;
+    std::vector<ReplaceableEntry*> temp_entry_array;
+    std::vector<Addr> temp_addr_array;
+    Addr temp_addr;
+    Addr new_addr;
+    ReplaceableEntry* temp;
+    uint32_t temp_set;
+    uint32_t temp_way;
+    uint32_t way;
+
+
+    // Parse all ways
+    for (way = 0; way < assoc; ++way) {
+        temp_addr_array.push_back(skew(addr, way)); //saving original address
         temp = sets[extractSet(addr, way)][way];
-         //NEED TO GET SET of the addr being passed into this function(preHashing)
-        //entries.push_back(sets[extractSet(addr, way)][way]);
         temp_entry_array.push_back(temp);
         entries.push_back(temp);
 
 
     }
-    for (uint32_t way = 0; way < assoc; ++way) {
+    for (way = 0; way < assoc; ++way) {
       temp_addr = temp_addr_array[way];
       temp_set = temp_entry_array[way]->getSet();
       temp_way = temp_entry_array[way]->getWay();
+      DPRINTF(candidate_victim, "l1 candidate set:%d, way:%d\n",
+               temp_set, temp_way);
+
+      new_addr = regenerateAddr(temp_addr >> tagShift, temp_entry_array[way] );
+
+      DPRINTF(candidate_victim, "FAILED OR NOT");
+
 
       for (uint32_t level_2 = 0; level_2 < assoc; ++level_2) {
         if (temp_way == level_2) {
           continue;
         }
-
-        temp = sets[extractSet(temp_addr, level_2)][level_2];
+        
+        
+        temp = sets[extractSet(new_addr, level_2)][level_2];
         temp->setParent(temp_set, temp_way);
         entries.push_back(temp);
 
         }
 
     }
-
-
-
     return entries;
 }
-
+*/
 // void setParent(ReplaceableEntry* entry) {
 //   entry->setParent(-1,-1);
 // }

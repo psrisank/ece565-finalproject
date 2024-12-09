@@ -196,6 +196,15 @@ TreePLRU::getVictim(const ReplacementCandidates& candidates) const
     return candidates[tree_index - (numLeaves - 1)];
 }
 
+CacheBlk*
+TreePLRU::ZgetVictim(const std::vector<CacheBlk*> candidates) const
+{
+    // There must be at least one replacement candidate
+    
+    return nullptr;
+}
+
+
 std::shared_ptr<ReplacementData>
 TreePLRU::instantiateEntry()
 {

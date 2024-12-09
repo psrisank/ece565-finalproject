@@ -53,15 +53,18 @@ class L1Cache(Cache):
     response_latency = 2
     mshrs = 4
     tgts_per_mshr = 20
+    l2_cache_bool = False
 
 class L1_ICache(L1Cache):
     size = '64kB'
     is_read_only = True
     # Writeback clean lines as well
     writeback_clean = True
+    l2_cache_bool = False
 
 class L1_DCache(L1Cache):
     size = '32kB'
+    l2_cache_bool = False
 
 class L2Cache(Cache):
     size = '256kB'
@@ -71,6 +74,7 @@ class L2Cache(Cache):
     response_latency = 20
     mshrs = 20
     tgts_per_mshr = 12
+    l2_cache_bool = True
     write_buffers = 8
 
 class IOCache(Cache):

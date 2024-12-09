@@ -282,6 +282,9 @@ class BaseTags : public ClockedObject
                                  const std::size_t size,
                                  std::vector<CacheBlk*>& evict_blks) = 0;
 
+    virtual std::vector<CacheBlk*> ZgetPossibleEntries(const Addr addr);
+    virtual CacheBlk* ZfindVictim(std::vector<CacheBlk*> entries);
+
     /**
      * Access block and update replacement data. May not succeed, in which case
      * nullptr is returned. This has all the implications of a cache access and

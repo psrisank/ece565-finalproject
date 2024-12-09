@@ -299,4 +299,12 @@ BaseTags::BaseTagStats::preDumpStats()
     tags.computeStats();
 }
 
+std::vector<CacheBlk*> BaseTags::ZgetPossibleEntries(const Addr addr) {
+    return {}; // Return an empty vector as a placeholder
+}
+
+CacheBlk* BaseTags::ZfindVictim(std::vector<CacheBlk*> entries) {
+    return nullptr; // Return nullptr as a placeholder
+}
+
 } // namespace gem5

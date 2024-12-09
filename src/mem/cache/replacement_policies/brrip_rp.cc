@@ -148,5 +148,16 @@ BRRIP::instantiateEntry()
     return std::shared_ptr<ReplacementData>(new BRRIPReplData(numRRPVBits));
 }
 
+CacheBlk*
+BRRIP::ZgetVictim(const std::vector<CacheBlk*> candidates) const
+{
+    // There must be at least one replacement candidate
+    
+    // Visit all candidates to find victim
+    return nullptr;;
+}
+
+
+
 } // namespace replacement_policy
 } // namespace gem5

@@ -61,5 +61,7 @@ BIP::reset(const std::shared_ptr<ReplacementData>& replacement_data) const
     }
 }
 
+
+
 } // namespace replacement_policy
 } // namespace gem5

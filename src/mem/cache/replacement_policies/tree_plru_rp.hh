@@ -196,6 +196,7 @@ class TreePLRU : public Base
      */
     ReplaceableEntry* getVictim(const ReplacementCandidates& candidates) const
                                                                      override;
+    CacheBlk* ZgetVictim(const std::vector<CacheBlk*> candidates)  const override;
 
     /**
      * Instantiate a replacement data entry. Consecutive calls to this

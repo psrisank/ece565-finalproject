@@ -33,6 +33,7 @@
 
 #include "base/compiler.hh"
 #include "mem/cache/replacement_policies/replaceable_entry.hh"
+#include "mem/cache/cache_blk.hh"
 #include "mem/packet.hh"
 #include "params/BaseReplacementPolicy.hh"
 #include "sim/sim_object.hh"
@@ -103,6 +104,12 @@ class Base : public SimObject
      */
     virtual ReplaceableEntry* getVictim(
                            const ReplacementCandidates& candidates) const = 0;
+
+    virtual CacheBlk* ZgetVictim(const std::vector<CacheBlk*> candidates) const = 0;
+
+    
+    
+    
 
     /**
      * Instantiate a replacement data entry.

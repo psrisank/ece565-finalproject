@@ -87,6 +87,7 @@ BaseCache::BaseCache(const BaseCacheParams &p, unsigned blk_size)
       prefetcher(p.prefetcher),
       writeAllocator(p.write_allocator),
       writebackClean(p.writeback_clean),
+      l2_cache_bool(p.l2_cache_bool),
       tempBlockWriteback(nullptr),
       writebackTempBlockAtomicEvent([this]{ writebackTempBlockAtomic(); },
                                     name(), false,
@@ -1604,6 +1605,9 @@ BaseCache::handleFill(PacketPtr pkt, CacheBlk *blk, PacketList &writebacks,
 CacheBlk*
 BaseCache::allocateBlock(const PacketPtr pkt, PacketList &writebacks)
 {
+    /*  bool inCache(Addr addr, bool is_secure) const {
+        return tags->findBlock(addr, is_secure);
+    */
     // Get address
     const Addr addr = pkt->getAddr();
 
@@ -1627,11 +1631,60 @@ BaseCache::allocateBlock(const PacketPtr pkt, PacketList &writebacks)
             pkt->getConstPtr<uint64_t>(), compression_lat, decompression_lat);
         blk_size_bits = comp_data->getSizeBits();
     }
-
-    // Find replacement victim
     std::vector<CacheBlk*> evict_blks;
-    CacheBlk *victim = tags->findVictim(addr, is_secure, blk_size_bits,
-                                        evict_blks);
+    
+    std::vector<CacheBlk*> l1_entries;
+    std::vector<CacheBlk*> l2_entries;
+    uint32_t l1_temp_set;
+    uint32_t l1_temp_way;
+    uint32_t iter;
+    CacheBlk *victim ;
+    DPRINTF(CacheRepl, "REACHED ALLOCATE BLOCK");
+    if(l2_cache_bool) {
+        l1_entries = tags->ZgetPossibleEntries(addr);
+    for (const auto &l1_entry_blk : l1_entries){
+        DPRINTF(CacheRepl, "Index: %d\n", iter);
+        DPRINTF(CacheRepl, "Replacement victim: %s\n", l1_entry_blk->print());
+        l1_temp_set = l1_entry_blk->getSet();
+        l1_temp_way = l1_entry_blk->getWay();
+        iter = iter + 1;
+
+        //CacheBlk* entryblk =  static_cast<CacheBlk*>(findBlockBySetAndWay(l1_temp_set,l1_temp_way));
+        Addr entryAddr = tags->regenerateBlkAddr(l1_entry_blk);
+        DPRINTF(CacheRepl, "Address regenBLK: %d", entryAddr);
+        std::vector<CacheBlk*> temp = tags->ZgetPossibleEntries(entryAddr);
+            
+            // Remove the l1 candidate from temp
+        auto it = std::find(temp.begin(), temp.end(), l1_entry_blk);
+        if (it != temp.end())
+            {
+                temp.erase(it);
+            }
+
+            for (const auto &l2 : temp)
+            {
+                l2->setParent(l1_temp_set,l1_temp_way);
+            }
+
+            l2_entries.insert(l2_entries.end(), temp.begin(), temp.end());
+
+        }
+    
+    l1_entries.insert(l1_entries.end(), l2_entries.begin(), l2_entries.end());
+    victim = tags->ZfindVictim(l1_entries);
+    evict_blks.push_back(victim);
+    DPRINTF(CacheRepl, "Address regenBLK: %x", victim->getTag());
+
+    }
+
+    else { 
+        victim = tags->findVictim(addr, is_secure, blk_size_bits, evict_blks);
+    }
+    
+    //invalidateBlock(victim);
+
+    
+    //CacheBlk *victim = tags->findVictim(addr, is_secure, blk_size_bits, evict_blks);
 
     // It is valid to return nullptr if there is no victim
     if (!victim)

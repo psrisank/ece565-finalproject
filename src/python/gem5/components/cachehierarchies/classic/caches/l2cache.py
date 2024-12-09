@@ -46,6 +46,7 @@ class L2Cache(Cache):
         mshrs: int = 20,
         tgts_per_mshr: int = 12,
         writeback_clean: bool = True,
+        l2_cache_bool: bool = True,
         PrefetcherCls: Type[BasePrefetcher] = StridePrefetcher,
     ):
         super().__init__()
@@ -57,4 +58,5 @@ class L2Cache(Cache):
         self.mshrs = mshrs
         self.tgts_per_mshr = tgts_per_mshr
         self.writeback_clean = writeback_clean
+        self.l2_cache_bool = l2_cache_bool;
         self.prefetcher = PrefetcherCls()

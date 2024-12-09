@@ -893,6 +893,8 @@ class BaseCache : public ClockedObject
      */
     const Cycles lookupLatency;
 
+
+    const bool l2_cache_bool;
     /**
      * The latency of data access of a cache. It occurs when there is
      * an access to the cache.

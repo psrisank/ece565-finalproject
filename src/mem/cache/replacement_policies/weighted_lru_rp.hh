@@ -84,6 +84,8 @@ class WeightedLRU : public LRU
      */
     ReplaceableEntry* getVictim(const ReplacementCandidates&
                                               candidates) const override;
+
+    CacheBlk* ZgetVictim(const std::vector<CacheBlk*> candidates)  const override;
 };
 
 } // namespace replacement_policy

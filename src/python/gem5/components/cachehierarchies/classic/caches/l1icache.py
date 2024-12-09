@@ -46,6 +46,8 @@ class L1ICache(Cache):
         mshrs: int = 16,
         tgts_per_mshr: int = 20,
         writeback_clean: bool = True,
+        l2_cache_bool: bool = False,
+        
         PrefetcherCls: Type[BasePrefetcher] = StridePrefetcher,
     ):
         super().__init__()
@@ -57,4 +59,5 @@ class L1ICache(Cache):
         self.mshrs = mshrs
         self.tgts_per_mshr = tgts_per_mshr
         self.writeback_clean = writeback_clean
+        self.l2_cache_bool = l2_cache_bool;
         self.prefetcher = PrefetcherCls()

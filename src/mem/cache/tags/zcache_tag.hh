@@ -155,6 +155,27 @@ class ZcacheTag : public BaseTags
         return blk;
     }
 
+    std::vector<CacheBlk*> ZgetPossibleEntries(const Addr addr) override {
+        std::vector<CacheBlk*> block_entries;
+        std::vector<ReplaceableEntry*> entries = indexingPolicy->getPossibleEntries(addr);
+        for (const auto &entry : entries)
+            {
+                CacheBlk* entryblk =  static_cast<CacheBlk* > (entry);
+                block_entries.push_back(entryblk);
+                //entry->setParent(l1_temp_set,l1_temp_way);
+            }
+
+        return block_entries;
+
+    }
+
+    CacheBlk* ZfindVictim(std::vector<CacheBlk*> entries) override{
+
+        return (replacementPolicy->ZgetVictim(entries)) ;
+
+    }
+
+    //std::vector<ReplaceableEntry*>
     /**
      * Find replacement victim based on address. The list of evicted blocks
      * only contains the victim.
@@ -165,19 +186,49 @@ class ZcacheTag : public BaseTags
      * @param evict_blks Cache blocks to be evicted.
      * @return Cache block to be replaced.
      */
+
     CacheBlk* findVictim(Addr addr, const bool is_secure,
                          const std::size_t size,
                          std::vector<CacheBlk*>& evict_blks) override
     {
         // Get possible entries to be victimized
-        const std::vector<ReplaceableEntry*> entries =
+        std::vector<ReplaceableEntry*> entries =
             indexingPolicy->getPossibleEntries(addr);
 
-        // Choose replacement victim from replacement candidates
+        CacheBlk* victim = static_cast<CacheBlk*>(replacementPolicy->getVictim( entries));
+        /*
+        uint32_t l1_temp_set;
+        uint32_t l1_temp_way;
 
-        CacheBlk* victim = static_cast<CacheBlk*>(replacementPolicy->getVictim(
-                                entries));
+        std::vector<ReplaceableEntry *> l2_entries;
+        for (const auto &l1_candidate : entries)
+        {
+            l1_temp_set = l1_candidate->getSet();
+            l1_temp_way = l1_candidate->getWay();
 
+            CacheBlk* entryblk =  static_cast<CacheBlk*>(findBlockBySetAndWay(l1_temp_set,l1_temp_way));
+            Addr entryAddr = regenerateBlkAddr(entryblk);
+            std::vector<ReplaceableEntry*> temp = indexingPolicy->getPossibleEntries(entryAddr);
+            
+            // Remove the l1 candidate from temp
+            auto it = std::find(temp.begin(), temp.end(), l1_candidate);
+            if (it != temp.end())
+            {
+                temp.erase(it);
+            }
+
+            for (const auto &l2 : temp)
+            {
+                l2->setParent(l1_temp_set,l1_temp_way);
+            }
+
+            l2_entries.insert(l2_entries.end(), temp.begin(), temp.end());
+        }
+        entries.insert(entries.end(), l2_entries.begin(), l2_entries.end());
+       
+        
+        
+        CacheBlk* victim = static_cast<CacheBlk*>(replacementPolicy->getVictim( entries));
         if ((victim->getParentSet() != -1) && (victim->getParentSet() != -1) ) { //level 2 candidate
             //if level 1 the cache.cc can proceed to evict exising block and replace w incoming
             //if candidate is level 2, evict the candidate, then move its parent into the level 2 position.
@@ -208,9 +259,11 @@ class ZcacheTag : public BaseTags
             return parent;
 
         }
+        */
 
         // There is only one eviction for this replacement
         evict_blks.push_back(victim);
+        
 
         return victim;
     }
