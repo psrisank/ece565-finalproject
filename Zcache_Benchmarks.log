@@ -1,0 +1,59 @@
+----------------------------------
+mcf_s
+----------------------------------
+system.l2.overallMissRate::total             0.763739                       # miss rate for overall accesses (Ratio)
+system.cpu.exec_context.thread_0.numInsts            0                       # Number of instructions committed (Count)
+system.cpu.numCycles                                0                       # Number of cpu cycles simulated (Cycle)
+----------------------------------
+
+
+
+
+----------------------------------
+lbm_s
+----------------------------------
+system.l2.overallMissRate::total             0.997838                       # miss rate for overall accesses (Ratio)
+system.cpu.exec_context.thread_0.numInsts            0                       # Number of instructions committed (Count)
+system.cpu.numCycles                                0                       # Number of cpu cycles simulated (Cycle)
+----------------------------------
+
+
+
+
+----------------------------------
+wrf_s
+----------------------------------
+system.cpu.exec_context.thread_0.numInsts            0                       # Number of instructions committed (Count)
+system.cpu.numCycles                                0                       # Number of cpu cycles simulated (Cycle)
+----------------------------------
+
+
+
+
+----------------------------------
+cactuBSSN_s
+----------------------------------
+system.l2.overallMissRate::total             0.402650                       # miss rate for overall accesses (Ratio)
+system.cpu.exec_context.thread_0.numInsts            0                       # Number of instructions committed (Count)
+system.cpu.numCycles                                0                       # Number of cpu cycles simulated (Cycle)
+----------------------------------
+
+
+
+
+----------------------------------
+pop2_s
+----------------------------------
+----------------------------------
+
+
+
+
+----------------------------------
+cam4_s
+----------------------------------
+----------------------------------
+
+
+
+
