@@ -4581,3 +4581,227 @@ bash-4.2$ ./build/ECE565-X86/gem5.fast configs/spec/spec_se.py -b $benchmark  -F
 
 bash-4.2$ exit
 exit
+bash-4.2$ bash generate_data.bash 
+gem5 Simulator System.  https://www.gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 22.0.0.2
+gem5 compiled Dec 12 2024 04:44:09
+gem5 started Dec 12 2024 12:45:24
+gem5 executing on ececomp2.ecn.purdue.edu, pid 22215
+command line: ./build/ECE565-X86/gem5.fast configs/spec/spec_se.py -b mcf_s -F=200000000 --maxinsts=700000000 --l2cache --caches --cpu-type=TimingSimpleCPU --l1d_size=32kB --l1i_size=32kB --l2_size=6MB --l1d_assoc=8 --l1i_assoc=8 --l2_assoc=24
+
+Arguments found!!!
+
+Namespace(abs_max_tick=18446744073709551615, arm_iset='arm', at_instruction=False, bench=None, benchmark='mcf_s', bp_type=None, cacheline_size=64, caches=True, checker=False, checkpoint_at_end=False, checkpoint_dir=None, checkpoint_restore=None, chroot=None, cmd='', cpu_clock='2GHz', cpu_type='TimingSimpleCPU', data_trace_file='', dist=False, dist_rank=0, dist_server_name='127.0.0.1', dist_server_port=2200, dist_size=0, dist_sync_on_pseudo_op=False, dist_sync_repeat='0us', dist_sync_start='5200000000000t', elastic_trace_en=False, enable_dram_powerdown=False, env='', errout='', ethernet_linkdelay='10us', ethernet_linkspeed='10Gbps', external_memory_system=None, fast_forward='200000000', indirect_bp_type=None, init_param=0, initialize_only=False, input='', inst_trace_file='', interp_dir=None, is_switch=False, l1d_assoc=8, l1d_hwp_type=None, l1d_size='32kB', l1i_assoc=8, l1i_hwp_type=None, l1i_size='32kB', l2_assoc=24, l2_hwp_type=None, l2_size='6MB', l2cache=True, l3_assoc=16, l3_size='16MB', list_bp_types=None, list_cpu_types=None, list_hwp_types=None, list_indirect_bp_types=None, list_mem_types=None, list_rp_types=None, max_checkpoints=5, maxinsts=700000000, maxtime=None, mem_channels=1, mem_channels_intlv=0, mem_ranks=None, mem_size='8GB', mem_type='DDR3_1600_8x8', memchecker=False, num_cpus=1, num_dirs=1, num_l2caches=1, num_l3caches=1, num_work_ids=None, options='', output='', param=[], prog_interval=None, redirects=[], rel_max_tick=None, repeat_switch=None, restore_simpoint_checkpoint=False, restore_with_cpu='AtomicSimpleCPU', ruby=False, simpoint=False, simpoint_interval=10000000, simpoint_profile=False, smt=False, spec_input='ref', standard_switch=None, stats_root=[], sys_clock='1GHz', sys_voltage='1.0V', take_checkpoints=None, take_simpoint_checkpoints=None, tlm_memory=None, wait_gdb=False, warmup_insts=None, work_begin_checkpoint_count=None, work_begin_cpu_id_exit=None, work_begin_exit_count=None, work_cpus_checkpoint_count=None, work_end_checkpoint_count=None, work_end_exit_count=None, work_item_id=None)
+Global frequency set at 1000000000000 ticks per second
+warn: No dot file generated. Please install pydot to generate the dot file and pdf.
+build/ECE565-X86/mem/cache/tags/indexing_policies/zcache.cc:51: warn: Associativity higher than number of skewing functions. Expect sub-optimal skewing.
+0: system.remote_gdb: listening for remote gdb on port 7000
+Switch at instruction count:200000000
+build/ECE565-X86/sim/simulate.cc:194: info: Entering event queue @ 0.  Starting simulation...
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+Switched CPUS @ tick 231885009500
+switching cpus
+build/ECE565-X86/sim/simulate.cc:194: info: Entering event queue @ 231885009500.  Starting simulation...
+build/ECE565-X86/sim/power_state.cc:106: warn: PowerState: Already in the requested power state, request ignored
+**** REAL SIMULATION ****
+build/ECE565-X86/sim/simulate.cc:194: info: Entering event queue @ 231885011000.  Starting simulation...
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+Exiting @ tick 3316377668500 because a thread reached the max instruction count
+gem5 Simulator System.  https://www.gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 22.0.0.2
+gem5 compiled Dec 12 2024 04:44:09
+gem5 started Dec 12 2024 13:04:09
+gem5 executing on ececomp2.ecn.purdue.edu, pid 56029
+command line: ./build/ECE565-X86/gem5.fast configs/spec/spec_se.py -b lbm_s -F=200000000 --maxinsts=700000000 --l2cache --caches --cpu-type=TimingSimpleCPU --l1d_size=32kB --l1i_size=32kB --l2_size=6MB --l1d_assoc=8 --l1i_assoc=8 --l2_assoc=24
+
+Arguments found!!!
+
+Namespace(abs_max_tick=18446744073709551615, arm_iset='arm', at_instruction=False, bench=None, benchmark='lbm_s', bp_type=None, cacheline_size=64, caches=True, checker=False, checkpoint_at_end=False, checkpoint_dir=None, checkpoint_restore=None, chroot=None, cmd='', cpu_clock='2GHz', cpu_type='TimingSimpleCPU', data_trace_file='', dist=False, dist_rank=0, dist_server_name='127.0.0.1', dist_server_port=2200, dist_size=0, dist_sync_on_pseudo_op=False, dist_sync_repeat='0us', dist_sync_start='5200000000000t', elastic_trace_en=False, enable_dram_powerdown=False, env='', errout='', ethernet_linkdelay='10us', ethernet_linkspeed='10Gbps', external_memory_system=None, fast_forward='200000000', indirect_bp_type=None, init_param=0, initialize_only=False, input='', inst_trace_file='', interp_dir=None, is_switch=False, l1d_assoc=8, l1d_hwp_type=None, l1d_size='32kB', l1i_assoc=8, l1i_hwp_type=None, l1i_size='32kB', l2_assoc=24, l2_hwp_type=None, l2_size='6MB', l2cache=True, l3_assoc=16, l3_size='16MB', list_bp_types=None, list_cpu_types=None, list_hwp_types=None, list_indirect_bp_types=None, list_mem_types=None, list_rp_types=None, max_checkpoints=5, maxinsts=700000000, maxtime=None, mem_channels=1, mem_channels_intlv=0, mem_ranks=None, mem_size='8GB', mem_type='DDR3_1600_8x8', memchecker=False, num_cpus=1, num_dirs=1, num_l2caches=1, num_l3caches=1, num_work_ids=None, options='', output='', param=[], prog_interval=None, redirects=[], rel_max_tick=None, repeat_switch=None, restore_simpoint_checkpoint=False, restore_with_cpu='AtomicSimpleCPU', ruby=False, simpoint=False, simpoint_interval=10000000, simpoint_profile=False, smt=False, spec_input='ref', standard_switch=None, stats_root=[], sys_clock='1GHz', sys_voltage='1.0V', take_checkpoints=None, take_simpoint_checkpoints=None, tlm_memory=None, wait_gdb=False, warmup_insts=None, work_begin_checkpoint_count=None, work_begin_cpu_id_exit=None, work_begin_exit_count=None, work_cpus_checkpoint_count=None, work_end_checkpoint_count=None, work_end_exit_count=None, work_item_id=None)
+Global frequency set at 1000000000000 ticks per second
+warn: No dot file generated. Please install pydot to generate the dot file and pdf.
+build/ECE565-X86/mem/cache/tags/indexing_policies/zcache.cc:51: warn: Associativity higher than number of skewing functions. Expect sub-optimal skewing.
+0: system.remote_gdb: listening for remote gdb on port 7000
+Switch at instruction count:200000000
+build/ECE565-X86/sim/simulate.cc:194: info: Entering event queue @ 0.  Starting simulation...
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+Switched CPUS @ tick 207486285000
+switching cpus
+build/ECE565-X86/sim/simulate.cc:194: info: Entering event queue @ 207486285000.  Starting simulation...
+build/ECE565-X86/sim/power_state.cc:106: warn: PowerState: Already in the requested power state, request ignored
+**** REAL SIMULATION ****
+build/ECE565-X86/sim/simulate.cc:194: info: Entering event queue @ 207486285500.  Starting simulation...
+Exiting @ tick 3572916403500 because a thread reached the max instruction count
+gem5 Simulator System.  https://www.gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 22.0.0.2
+gem5 compiled Dec 12 2024 04:44:09
+gem5 started Dec 12 2024 13:34:16
+gem5 executing on ececomp2.ecn.purdue.edu, pid 130320
+command line: ./build/ECE565-X86/gem5.fast configs/spec/spec_se.py -b wrf_s -F=200000000 --maxinsts=700000000 --l2cache --caches --cpu-type=TimingSimpleCPU --l1d_size=32kB --l1i_size=32kB --l2_size=6MB --l1d_assoc=8 --l1i_assoc=8 --l2_assoc=24
+
+Arguments found!!!
+
+Namespace(abs_max_tick=18446744073709551615, arm_iset='arm', at_instruction=False, bench=None, benchmark='wrf_s', bp_type=None, cacheline_size=64, caches=True, checker=False, checkpoint_at_end=False, checkpoint_dir=None, checkpoint_restore=None, chroot=None, cmd='', cpu_clock='2GHz', cpu_type='TimingSimpleCPU', data_trace_file='', dist=False, dist_rank=0, dist_server_name='127.0.0.1', dist_server_port=2200, dist_size=0, dist_sync_on_pseudo_op=False, dist_sync_repeat='0us', dist_sync_start='5200000000000t', elastic_trace_en=False, enable_dram_powerdown=False, env='', errout='', ethernet_linkdelay='10us', ethernet_linkspeed='10Gbps', external_memory_system=None, fast_forward='200000000', indirect_bp_type=None, init_param=0, initialize_only=False, input='', inst_trace_file='', interp_dir=None, is_switch=False, l1d_assoc=8, l1d_hwp_type=None, l1d_size='32kB', l1i_assoc=8, l1i_hwp_type=None, l1i_size='32kB', l2_assoc=24, l2_hwp_type=None, l2_size='6MB', l2cache=True, l3_assoc=16, l3_size='16MB', list_bp_types=None, list_cpu_types=None, list_hwp_types=None, list_indirect_bp_types=None, list_mem_types=None, list_rp_types=None, max_checkpoints=5, maxinsts=700000000, maxtime=None, mem_channels=1, mem_channels_intlv=0, mem_ranks=None, mem_size='8GB', mem_type='DDR3_1600_8x8', memchecker=False, num_cpus=1, num_dirs=1, num_l2caches=1, num_l3caches=1, num_work_ids=None, options='', output='', param=[], prog_interval=None, redirects=[], rel_max_tick=None, repeat_switch=None, restore_simpoint_checkpoint=False, restore_with_cpu='AtomicSimpleCPU', ruby=False, simpoint=False, simpoint_interval=10000000, simpoint_profile=False, smt=False, spec_input='ref', standard_switch=None, stats_root=[], sys_clock='1GHz', sys_voltage='1.0V', take_checkpoints=None, take_simpoint_checkpoints=None, tlm_memory=None, wait_gdb=False, warmup_insts=None, work_begin_checkpoint_count=None, work_begin_cpu_id_exit=None, work_begin_exit_count=None, work_cpus_checkpoint_count=None, work_end_checkpoint_count=None, work_end_exit_count=None, work_item_id=None)
+Global frequency set at 1000000000000 ticks per second
+warn: No dot file generated. Please install pydot to generate the dot file and pdf.
+build/ECE565-X86/mem/cache/tags/indexing_policies/zcache.cc:51: warn: Associativity higher than number of skewing functions. Expect sub-optimal skewing.
+0: system.remote_gdb: listening for remote gdb on port 7000
+Switch at instruction count:200000000
+build/ECE565-X86/sim/simulate.cc:194: info: Entering event queue @ 0.  Starting simulation...
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:86: warn: ignoring syscall rt_sigaction(...)
+      (further warnings will be suppressed)
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+-------------- FATAL CALLED ---------------
+ERROR OPENING namelist.output
+-------------------------------------------
+Switched CPUS @ tick 956534500
+switching cpus
+build/ECE565-X86/sim/power_state.cc:106: warn: PowerState: Already in the requested power state, request ignored
+**** REAL SIMULATION ****
+build/ECE565-X86/sim/simulate.cc:194: info: Entering event queue @ 956534500.  Starting simulation...
+^CExiting @ tick 160914339794500 because user interrupt received
+gem5 Simulator System.  https://www.gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 22.0.0.2
+gem5 compiled Dec 12 2024 04:44:09
+gem5 started Dec 12 2024 13:37:34
+gem5 executing on ececomp2.ecn.purdue.edu, pid 5969
+command line: ./build/ECE565-X86/gem5.fast configs/spec/spec_se.py -b cactuBSSN_s -F=200000000 --maxinsts=700000000 --l2cache --caches --cpu-type=TimingSimpleCPU --l1d_size=32kB --l1i_size=32kB --l2_size=6MB --l1d_assoc=8 --l1i_assoc=8 --l2_assoc=24
+
+Arguments found!!!
+
+Namespace(abs_max_tick=18446744073709551615, arm_iset='arm', at_instruction=False, bench=None, benchmark='cactuBSSN_s', bp_type=None, cacheline_size=64, caches=True, checker=False, checkpoint_at_end=False, checkpoint_dir=None, checkpoint_restore=None, chroot=None, cmd='', cpu_clock='2GHz', cpu_type='TimingSimpleCPU', data_trace_file='', dist=False, dist_rank=0, dist_server_name='127.0.0.1', dist_server_port=2200, dist_size=0, dist_sync_on_pseudo_op=False, dist_sync_repeat='0us', dist_sync_start='5200000000000t', elastic_trace_en=False, enable_dram_powerdown=False, env='', errout='', ethernet_linkdelay='10us', ethernet_linkspeed='10Gbps', external_memory_system=None, fast_forward='200000000', indirect_bp_type=None, init_param=0, initialize_only=False, input='', inst_trace_file='', interp_dir=None, is_switch=False, l1d_assoc=8, l1d_hwp_type=None, l1d_size='32kB', l1i_assoc=8, l1i_hwp_type=None, l1i_size='32kB', l2_assoc=24, l2_hwp_type=None, l2_size='6MB', l2cache=True, l3_assoc=16, l3_size='16MB', list_bp_types=None, list_cpu_types=None, list_hwp_types=None, list_indirect_bp_types=None, list_mem_types=None, list_rp_types=None, max_checkpoints=5, maxinsts=700000000, maxtime=None, mem_channels=1, mem_channels_intlv=0, mem_ranks=None, mem_size='8GB', mem_type='DDR3_1600_8x8', memchecker=False, num_cpus=1, num_dirs=1, num_l2caches=1, num_l3caches=1, num_work_ids=None, options='', output='', param=[], prog_interval=None, redirects=[], rel_max_tick=None, repeat_switch=None, restore_simpoint_checkpoint=False, restore_with_cpu='AtomicSimpleCPU', ruby=False, simpoint=False, simpoint_interval=10000000, simpoint_profile=False, smt=False, spec_input='ref', standard_switch=None, stats_root=[], sys_clock='1GHz', sys_voltage='1.0V', take_checkpoints=None, take_simpoint_checkpoints=None, tlm_memory=None, wait_gdb=False, warmup_insts=None, work_begin_checkpoint_count=None, work_begin_cpu_id_exit=None, work_begin_exit_count=None, work_cpus_checkpoint_count=None, work_end_checkpoint_count=None, work_end_exit_count=None, work_item_id=None)
+Global frequency set at 1000000000000 ticks per second
+warn: No dot file generated. Please install pydot to generate the dot file and pdf.
+build/ECE565-X86/mem/cache/tags/indexing_policies/zcache.cc:51: warn: Associativity higher than number of skewing functions. Expect sub-optimal skewing.
+0: system.remote_gdb: listening for remote gdb on port 7000
+Switch at instruction count:200000000
+build/ECE565-X86/sim/simulate.cc:194: info: Entering event queue @ 0.  Starting simulation...
+build/ECE565-X86/sim/mem_state.cc:443: info: Increasing stack size by one page.
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+^CSwitched CPUS @ tick 104019000
+switching cpus
+build/ECE565-X86/sim/power_state.cc:106: warn: PowerState: Already in the requested power state, request ignored
+**** REAL SIMULATION ****
+build/ECE565-X86/sim/simulate.cc:194: info: Entering event queue @ 104019000.  Starting simulation...
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+build/ECE565-X86/sim/syscall_emul.cc:74: warn: ignoring syscall mprotect(...)
+^CExiting @ tick 1201928500 because user interrupt received
+^C^Cgem5 Simulator System.  https://www.gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 22.0.0.2
+gem5 compiled Dec 12 2024 04:44:09
+gem5 started Dec 12 2024 13:37:35
+gem5 executing on ececomp2.ecn.purdue.edu, pid 6037
+command line: ./build/ECE565-X86/gem5.fast configs/spec/spec_se.py -b pop2_s -F=200000000 --maxinsts=700000000 --l2cache --caches --cpu-type=TimingSimpleCPU --l1d_size=32kB --l1i_size=32kB --l2_size=6MB --l1d_assoc=8 --l1i_assoc=8 --l2_assoc=24
+
+Arguments found!!!
+
+Namespace(abs_max_tick=18446744073709551615, arm_iset='arm', at_instruction=False, bench=None, benchmark='pop2_s', bp_type=None, cacheline_size=64, caches=True, checker=False, checkpoint_at_end=False, checkpoint_dir=None, checkpoint_restore=None, chroot=None, cmd='', cpu_clock='2GHz', cpu_type='TimingSimpleCPU', data_trace_file='', dist=False, dist_rank=0, dist_server_name='127.0.0.1', dist_server_port=2200, dist_size=0, dist_sync_on_pseudo_op=False, dist_sync_repeat='0us', dist_sync_start='5200000000000t', elastic_trace_en=False, enable_dram_powerdown=False, env='', errout='', ethernet_linkdelay='10us', ethernet_linkspeed='10Gbps', external_memory_system=None, fast_forward='200000000', indirect_bp_type=None, init_param=0, initialize_only=False, input='', inst_trace_file='', interp_dir=None, is_switch=False, l1d_assoc=8, l1d_hwp_type=None, l1d_size='32kB', l1i_assoc=8, l1i_hwp_type=None, l1i_size='32kB', l2_assoc=24, l2_hwp_type=None, l2_size='6MB', l2cache=True, l3_assoc=16, l3_size='16MB', list_bp_types=None, list_cpu_types=None, list_hwp_types=None, list_indirect_bp_types=None, list_mem_types=None, list_rp_types=None, max_checkpoints=5, maxinsts=700000000, maxtime=None, mem_channels=1, mem_channels_intlv=0, mem_ranks=None, mem_size='8GB', mem_type='DDR3_1600_8x8', memchecker=False, num_cpus=1, num_dirs=1, num_l2caches=1, num_l3caches=1, num_work_ids=None, options='', output='', param=[], prog_interval=None, redirects=[], rel_max_tick=None, repeat_switch=None, restore_simpoint_checkpoint=False, restore_with_cpu='AtomicSimpleCPU', ruby=False, simpoint=False, simpoint_interval=10000000, simpoint_profile=False, smt=False, spec_input='ref', standard_switch=None, stats_root=[], sys_clock='1GHz', sys_voltage='1.0V', take_checkpoints=None, take_simpoint_checkpoints=None, tlm_memory=None, wait_gdb=False, warmup_insts=None, work_begin_checkpoint_count=None, work_begin_cpu_id_exit=None, work_begin_exit_count=None, work_cpus_checkpoint_count=None, work_end_checkpoint_count=None, work_end_exit_count=None, work_item_id=None)
+Global frequency set at 1000000000000 ticks per second
+warn: No dot file generated. Please install pydot to generate the dot file and pdf.
+build/ECE565-X86/mem/cache/tags/indexing_policies/zcache.cc:51: warn: Associativity higher than number of skewing functions. Expect sub-optimal skewing.
+0: system.remote_gdb: listening for remote gdb on port 7000
+^C^C^C^\generate_data.bash: line 10:  6037 Quit                    (core dumped) ./build/ECE565-X86/gem5.fast configs/spec/spec_se.py -b $benchmark -F=200000000 --maxinsts=700000000 --l2cache --caches --cpu-type=TimingSimpleCPU --l1d_size=32kB --l1i_size=32kB --l2_size=6MB --l1d_assoc=8 --l1i_assoc=8 --l2_assoc=24
+gem5 Simulator System.  https://www.gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 22.0.0.2
+gem5 compiled Dec 12 2024 04:44:09
+gem5 started Dec 12 2024 13:37:38
+gem5 executing on ececomp2.ecn.purdue.edu, pid 6176
+command line: ./build/ECE565-X86/gem5.fast configs/spec/spec_se.py -b cam4_s -F=200000000 --maxinsts=700000000 --l2cache --caches --cpu-type=TimingSimpleCPU --l1d_size=32kB --l1i_size=32kB --l2_size=6MB --l1d_assoc=8 --l1i_assoc=8 --l2_assoc=24
+
+Arguments found!!!
+
+Namespace(abs_max_tick=18446744073709551615, arm_iset='arm', at_instruction=False, bench=None, benchmark='cam4_s', bp_type=None, cacheline_size=64, caches=True, checker=False, checkpoint_at_end=False, checkpoint_dir=None, checkpoint_restore=None, chroot=None, cmd='', cpu_clock='2GHz', cpu_type='TimingSimpleCPU', data_trace_file='', dist=False, dist_rank=0, dist_server_name='127.0.0.1', dist_server_port=2200, dist_size=0, dist_sync_on_pseudo_op=False, dist_sync_repeat='0us', dist_sync_start='5200000000000t', elastic_trace_en=False, enable_dram_powerdown=False, env='', errout='', ethernet_linkdelay='10us', ethernet_linkspeed='10Gbps', external_memory_system=None, fast_forward='200000000', indirect_bp_type=None, init_param=0, initialize_only=False, input='', inst_trace_file='', interp_dir=None, is_switch=False, l1d_assoc=8, l1d_hwp_type=None, l1d_size='32kB', l1i_assoc=8, l1i_hwp_type=None, l1i_size='32kB', l2_assoc=24, l2_hwp_type=None, l2_size='6MB', l2cache=True, l3_assoc=16, l3_size='16MB', list_bp_types=None, list_cpu_types=None, list_hwp_types=None, list_indirect_bp_types=None, list_mem_types=None, list_rp_types=None, max_checkpoints=5, maxinsts=700000000, maxtime=None, mem_channels=1, mem_channels_intlv=0, mem_ranks=None, mem_size='8GB', mem_type='DDR3_1600_8x8', memchecker=False, num_cpus=1, num_dirs=1, num_l2caches=1, num_l3caches=1, num_work_ids=None, options='', output='', param=[], prog_interval=None, redirects=[], rel_max_tick=None, repeat_switch=None, restore_simpoint_checkpoint=False, restore_with_cpu='AtomicSimpleCPU', ruby=False, simpoint=False, simpoint_interval=10000000, simpoint_profile=False, smt=False, spec_input='ref', standard_switch=None, stats_root=[], sys_clock='1GHz', sys_voltage='1.0V', take_checkpoints=None, take_simpoint_checkpoints=None, tlm_memory=None, wait_gdb=False, warmup_insts=None, work_begin_checkpoint_count=None, work_begin_cpu_id_exit=None, work_begin_exit_count=None, work_cpus_checkpoint_count=None, work_end_checkpoint_count=None, work_end_exit_count=None, work_item_id=None)
+Global frequency set at 1000000000000 ticks per second
+warn: No dot file generated. Please install pydot to generate the dot file and pdf.
+build/ECE565-X86/mem/cache/tags/indexing_policies/zcache.cc:51: warn: Associativity higher than number of skewing functions. Expect sub-optimal skewing.
+0: system.remote_gdb: listening for remote gdb on port 7000
+^\generate_data.bash: line 10:  6176 Quit                    (core dumped) ./build/ECE565-X86/gem5.fast configs/spec/spec_se.py -b $benchmark -F=200000000 --maxinsts=700000000 --l2cache --caches --cpu-type=TimingSimpleCPU --l1d_size=32kB --l1i_size=32kB --l2_size=6MB --l1d_assoc=8 --l1i_assoc=8 --l2_assoc=24
+bash-4.2$ clear
+[H[Jbash-4.2$ exit
+exit
