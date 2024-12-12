@@ -51,6 +51,9 @@
 #include "base/intmath.hh"
 #include "base/logging.hh"
 #include "mem/cache/replacement_policies/replaceable_entry.hh"
+#include "base/trace.hh"
+#include "debug/Zcache.hh"
+// #include "mem/cache/cache_blk.hh"
 
 namespace gem5
 {
@@ -78,7 +81,7 @@ BaseIndexingPolicy::getEntry(const uint32_t set, const uint32_t way) const
 }
 
 void
-BaseIndexingPolicy::setEntry(ReplaceableEntry* entry, const uint64_t index)
+BaseIndexingPolicy::setEntry(ReplaceableEntry* entry, const uint64_t index, const uint64_t addr)
 {
     // Calculate set and way from entry index
     const std::lldiv_t div_result = std::div((long long)index, assoc);
@@ -91,14 +94,25 @@ BaseIndexingPolicy::setEntry(ReplaceableEntry* entry, const uint64_t index)
     // Assign a free pointer
     sets[set][way] = entry;
 
+    // Assign the address as well
+    // addresses[set][way] = addr;
+
     // Inform the entry its position
-    entry->setPosition(set, way);
+    entry->setPosition(set, way, addr);
+    // DPRINTF("Set position in base.cc with tag: %u\n", addr);
+
 }
 
 Addr
 BaseIndexingPolicy::extractTag(const Addr addr) const
 {
+    // DPRINTF(Zcache, "Tag shift number is: %d\n", tagShift);
     return (addr >> tagShift);
+}
+
+std::vector<ReplaceableEntry*> 
+BaseIndexingPolicy::getPossibleEntriesSecond(const Addr addr, ReplaceableEntry* parent, const int parentWay) {
+    return std::vector<ReplaceableEntry*>();
 }
 
 } // namespace gem5

@@ -53,18 +53,20 @@ class L1Cache(Cache):
     response_latency = 2
     mshrs = 4
     tgts_per_mshr = 20
+    writeback_clean = True
 
 class L1_ICache(L1Cache):
-    size = '64kB'
+    size = '1kB'
     is_read_only = True
     # Writeback clean lines as well
     writeback_clean = True
 
 class L1_DCache(L1Cache):
-    size = '32kB'
+    size = '1kB'
+
 
 class L2Cache(Cache):
-    size = '256kB'
+    size = '256kB' # used to be size 256
     assoc = 8
     tag_latency = 20
     data_latency = 20
@@ -72,6 +74,7 @@ class L2Cache(Cache):
     mshrs = 20
     tgts_per_mshr = 12
     write_buffers = 8
+
 
 class IOCache(Cache):
     assoc = 8
@@ -81,6 +84,7 @@ class IOCache(Cache):
     mshrs = 20
     size = '1kB'
     tgts_per_mshr = 12
+
 
 class PageTableWalkerCache(Cache):
     assoc = 2

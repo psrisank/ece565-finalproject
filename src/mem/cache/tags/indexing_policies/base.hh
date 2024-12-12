@@ -51,6 +51,8 @@
 
 #include "params/BaseIndexingPolicy.hh"
 #include "sim/sim_object.hh"
+#include "mem/cache/cache_blk.hh"
+
 
 namespace gem5
 {
@@ -90,6 +92,7 @@ class BaseIndexingPolicy : public SimObject
      * The cache sets.
      */
     std::vector<std::vector<ReplaceableEntry*>> sets;
+    std::vector<std::vector<Addr>> addresses;
 
     /**
      * The amount to shift the address to get the tag.
@@ -118,7 +121,7 @@ class BaseIndexingPolicy : public SimObject
      * @param entry The entry pointer.
      * @param index An unique index for the entry.
      */
-    void setEntry(ReplaceableEntry* entry, const uint64_t index);
+    void setEntry(ReplaceableEntry* entry, const uint64_t index,  const uint64_t addr);
 
     /**
      * Get an entry based on its set and way. All entries must have been set
@@ -138,6 +141,7 @@ class BaseIndexingPolicy : public SimObject
      */
     virtual Addr extractTag(const Addr addr) const;
 
+
     /**
      * Find all possible entries for insertion and replacement of an address.
      * Should be called immediately before ReplacementPolicy's findVictim()
@@ -148,6 +152,8 @@ class BaseIndexingPolicy : public SimObject
      */
     virtual std::vector<ReplaceableEntry*> getPossibleEntries(const Addr addr)
                                                                     const = 0;
+
+    virtual std::vector<ReplaceableEntry*> getPossibleEntriesSecond(const Addr addr, ReplaceableEntry* parent, const int parentWay);
 
     /**
      * Regenerate an entry's address from its tag and assigned indexing bits.

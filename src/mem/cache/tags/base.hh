@@ -59,6 +59,7 @@
 #include "mem/packet.hh"
 #include "params/BaseTags.hh"
 #include "sim/clocked_object.hh"
+// #include "mem/"
 
 namespace gem5
 {
@@ -87,6 +88,10 @@ class BaseTags : public ClockedObject
 
     /** Indexing policy */
     BaseIndexingPolicy *indexingPolicy;
+
+    // Zcache *zcachePolicy;
+
+
 
     /**
      * The number of tags that need to be touched to meet the warmup

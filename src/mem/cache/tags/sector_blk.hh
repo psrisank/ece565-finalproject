@@ -179,7 +179,7 @@ class SectorBlk : public TaggedEntry
      * @param set The set of this entry and sub-entries.
      * @param way The way of this entry and sub-entries.
      */
-    void setPosition(const uint32_t set, const uint32_t way) override;
+    void setPosition(const uint32_t set, const uint32_t way, const uint64_t address) override;
 
     /**
      * Print relevant information for this sector block and its sub-blocks.

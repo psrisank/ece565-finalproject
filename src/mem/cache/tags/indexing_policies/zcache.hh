@@ -138,6 +138,7 @@ class Zcache : public BaseIndexingPolicy
      */
     uint32_t extractSet(const Addr addr, const uint32_t way) const;
 
+
   public:
     /** Convenience typedef. */
      typedef ZcacheParams Params;
@@ -152,6 +153,9 @@ class Zcache : public BaseIndexingPolicy
      */
     ~Zcache() {};
 
+
+    std::vector<ReplaceableEntry*> getPossibleEntriesSecond(const Addr addr, ReplaceableEntry* parent, const int parentWay) override;
+
     /**
      * Find all possible entries for insertion and replacement of an address.
      * Should be called immediately before ReplacementPolicy's findVictim()
@@ -162,6 +166,9 @@ class Zcache : public BaseIndexingPolicy
      */
     std::vector<ReplaceableEntry*> getPossibleEntries(const Addr addr) const
                                                                    override;
+
+    // std::vector<ReplaceableEntry*> getPossibleEntriesNew(const Addr addr, const uint32_t originalSet) const
+    //                                                                 override;
 
     /**
      * Regenerate an entry's address from its tag and assigned set and way.

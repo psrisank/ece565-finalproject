@@ -37,6 +37,8 @@
 
 #include "base/cprintf.hh"
 #include "base/logging.hh"
+#include "base/trace.hh"
+#include "debug/Zcache.hh"
 
 namespace gem5
 {
@@ -146,11 +148,11 @@ SectorBlk::invalidateSubBlk()
 }
 
 void
-SectorBlk::setPosition(const uint32_t set, const uint32_t way)
+SectorBlk::setPosition(const uint32_t set, const uint32_t way, const uint64_t address)
 {
-    ReplaceableEntry::setPosition(set, way);
+    ReplaceableEntry::setPosition(set, way, address);
     for (auto& blk : blks) {
-        blk->setPosition(set, way);
+        blk->setPosition(set, way, address);
     }
 }
 

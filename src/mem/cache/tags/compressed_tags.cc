@@ -97,7 +97,7 @@ CompressedTags::tagsInit()
         }
 
         // Link block to indexing policy
-        indexingPolicy->setEntry(superblock, superblock_index);
+        indexingPolicy->setEntry(superblock, superblock_index, superblock->getTag());
     }
 }
 

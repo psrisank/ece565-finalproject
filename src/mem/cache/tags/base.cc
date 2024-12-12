@@ -81,7 +81,7 @@ BaseTags::findBlock(Addr addr, bool is_secure) const
 {
     // Extract block tag
     Addr tag = extractTag(addr);
-
+    // DPRINTF(Zcache, "Original tag: %x\n", tag);
     // Find possible entries that may contain the given address
     const std::vector<ReplaceableEntry*> entries =
         indexingPolicy->getPossibleEntries(addr);

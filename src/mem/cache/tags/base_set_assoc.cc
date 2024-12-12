@@ -75,13 +75,15 @@ BaseSetAssoc::tagsInit()
         CacheBlk* blk = &blks[blk_index];
 
         // Link block to indexing policy
-        indexingPolicy->setEntry(blk, blk_index);
+        indexingPolicy->setEntry(blk, blk_index, blk->getTag());
 
         // Associate a data chunk to the block
         blk->data = &dataBlks[blkSize*blk_index];
 
         // Associate a replacement data entry to the block
         blk->replacementData = replacementPolicy->instantiateEntry();
+        // DPRINTF(Zcache, "In base_set_assoc, Initialized cache block with tag: %x\n", blk->data);
+
     }
 }
 

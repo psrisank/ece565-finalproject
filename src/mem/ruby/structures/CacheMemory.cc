@@ -53,6 +53,9 @@
 #include "mem/ruby/protocol/AccessPermission.hh"
 #include "mem/ruby/system/RubySystem.hh"
 
+// #include "base/trace.hh"
+// #include "debug/Zcache.hh"
+
 namespace gem5
 {
 
@@ -292,7 +295,9 @@ CacheMemory::allocate(Addr address, AbstractCacheEntry *entry)
                     address);
             set[i]->m_locked = -1;
             m_tag_index[address] = i;
-            set[i]->setPosition(cacheSet, i);
+            set[i]->setPosition(cacheSet, i, address);
+            // DPRINTF("Set position in CacheMemory.cc with tag: %u\n", address);
+
             set[i]->replacementData = replacement_data[cacheSet][i];
             set[i]->setLastAccess(curTick());
 

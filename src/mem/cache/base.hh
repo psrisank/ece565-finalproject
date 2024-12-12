@@ -316,17 +316,17 @@ class BaseCache : public ClockedObject
         BaseCache *cache;
 
       protected:
-        virtual bool recvTimingSnoopResp(PacketPtr pkt) override;
+        virtual bool recvTimingSnoopResp(PacketPtr pkt) override; // receive timing snoop response from CPU
 
-        virtual bool tryTiming(PacketPtr pkt) override;
+        virtual bool tryTiming(PacketPtr pkt) override; // check if cache can handle a timing request
 
-        virtual bool recvTimingReq(PacketPtr pkt) override;
+        virtual bool recvTimingReq(PacketPtr pkt) override; // request from the L1
 
-        virtual Tick recvAtomic(PacketPtr pkt) override;
+        virtual Tick recvAtomic(PacketPtr pkt) override; // ignore, for atomic only
 
-        virtual void recvFunctional(PacketPtr pkt) override;
+        virtual void recvFunctional(PacketPtr pkt) override; // receive functional request packet from CPU
 
-        virtual AddrRangeList getAddrRanges() const override;
+        virtual AddrRangeList getAddrRanges() const override; // get address ranges of the cache
 
       public:
 

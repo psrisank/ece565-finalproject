@@ -406,6 +406,7 @@ void
 Cache::recvTimingReq(PacketPtr pkt)
 {
     DPRINTF(CacheTags, "%s tags:\n%s\n", __func__, tags->print());
+    // DPRINTF(Zcache, "In recvTimingReq (from CPU or L1), address of the packet is: %x\n", pkt->getAddr());
 
     promoteWholeLineWrites(pkt);
 

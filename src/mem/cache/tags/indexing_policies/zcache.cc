@@ -208,18 +208,58 @@ Zcache::regenerateAddr(const Addr tag,
            ((deskew(addr_set, entry->getWay()) & setMask) << setShift);
 }
 
+// std::vector<ReplaceableEntry*>
+// Zcache::getPossibleEntries(const Addr addr) const
+// {
+//     std::vector<ReplaceableEntry*> entries;
+//     DPRINTF(Zcache, "Get Possible Entries was called.\n");
+//     // Parse all ways
+//     for (uint32_t way = 0; way < assoc; ++way) {
+//         // Apply hash to get set, and get way entry in it
+//         entries.push_back(sets[extractSet(addr, way)][way]);
+//     }
+
+//     return entries;
+// }
+
+
 std::vector<ReplaceableEntry*>
 Zcache::getPossibleEntries(const Addr addr) const
 {
-    std::vector<ReplaceableEntry*> entries;
-    DPRINTF(Zcache, "Get Possible Entries was called.\n");
-    // Parse all ways
-    for (uint32_t way = 0; way < assoc; ++way) {
-        // Apply hash to get set, and get way entry in it
-        entries.push_back(sets[extractSet(addr, way)][way]);
-    }
 
+    std::vector<ReplaceableEntry*> entries;
+    // Walk through all possible ways
+    for (uint32_t way = 0; way < assoc; ++way) {
+        // Apply ZCache-specific hashing to determine the set for this way
+        // Get entry at the set and way
+        uint32_t set = extractSet(addr, way);  // Custom hash function for each way
+        ReplaceableEntry* entry = sets[set][way];
+        entry->setParentEntry(NULL);
+        entries.push_back(entry);  // Add to the list of possible entries
+        // DPRINTF(Zcache, "Address of this entry is: %u\n", entry->getAddr());
+    }
     return entries;
 }
+
+
+std::vector<ReplaceableEntry*>
+Zcache::getPossibleEntriesSecond(const Addr addr, ReplaceableEntry* parent, const int parentWay)
+{
+    // DPRINTF(Zcache, "Generating second level candidates.\n");
+    std::vector<ReplaceableEntry*> entries;
+    // Walk through all possible ways
+    for (uint32_t way = 0; way < assoc; ++way) {
+        // Apply ZCache-specific hashing to determine the set for this way
+        // Get entry at the set and way
+        if (way != parentWay) {
+          uint32_t set = extractSet(addr, way);  // Custom hash function for each way
+          ReplaceableEntry* entry = sets[set][way];
+          entry->setParentEntry(parent);
+          entries.push_back(entry);  // Add to the list of possible entries
+        }
+    }
+    return entries;
+}
+
 
 } // namespace gem5

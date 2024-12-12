@@ -70,6 +70,8 @@ class TaggedEntry : public ReplaceableEntry
      */
     virtual Addr getTag() const { return _tag; }
 
+    virtual Addr getAddr() const { return _addr; }
+
     /**
      * Checks if the given tag information corresponds to this entry's.
      *
@@ -149,6 +151,8 @@ class TaggedEntry : public ReplaceableEntry
 
     /** The entry's tag. */
     Addr _tag;
+
+    Addr _addr;
 
     /** Clear secure bit. Should be only used by the invalidation function. */
     void clearSecure() { _secure = false; }

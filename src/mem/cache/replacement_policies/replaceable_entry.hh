@@ -35,6 +35,9 @@
 #include "base/compiler.hh"
 #include "base/cprintf.hh"
 
+#include "base/trace.hh"
+#include "debug/Zcache.hh"
+
 namespace gem5
 {
 
@@ -72,11 +75,16 @@ class ReplaceableEntry
      * Way (relative position within the set) to which this entry belongs.
      */
     uint32_t _way;
-    int _parentSet;
-    int _parentWay;
+    uint32_t _parentSet;
+    uint32_t  _parentWay;
+    uint64_t _addr;
+    uint64_t _parentAddr;
+
+    ReplaceableEntry* _parentEntry;
 
   public:
     ReplaceableEntry() = default;
+    // virtual ReplaceablEntry() = default;
     virtual ~ReplaceableEntry() = default;
 
     /**
@@ -92,17 +100,29 @@ class ReplaceableEntry
      * @param way The way of this entry.
      */
     virtual void
-    setPosition(const uint32_t set, const uint32_t way)
+    setPosition(const uint32_t set, const uint32_t way, uint64_t addr)
     {
         _set = set;
         _way = way;
+        _addr = addr;
+        // DPRINTF(Zcache, "ADDRESS: %x was placed in set %d, way %d.\n", addr, set, way);
     }
 
     virtual void
-    setParent(const int parentSet, const int parentWay)
+    setParent(const int parentAddr, const int parentSet, const int parentWay)
     {
         _parentSet = parentSet;
         _parentWay = parentWay;
+        _parentAddr = parentAddr;
+    }
+
+    virtual void
+    setParentEntry(ReplaceableEntry* parentEntry) {
+      _parentEntry = parentEntry;
+    }
+
+    ReplaceableEntry* getParentEntry() {
+      return _parentEntry;
     }
 
     /**
@@ -118,6 +138,7 @@ class ReplaceableEntry
      * @return The way to which this entry belongs.
      */
     uint32_t getWay() const { return _way; }
+    uint64_t getAddr() const {return _addr; }
     int getParentSet() const { return _parentSet; }
     int getParentWay() const { return _parentWay; }
 

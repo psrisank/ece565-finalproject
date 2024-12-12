@@ -111,7 +111,7 @@ SectorTags::tagsInit()
         }
 
         // Link block to indexing policy
-        indexingPolicy->setEntry(sec_blk, sec_blk_index);
+        indexingPolicy->setEntry(sec_blk, sec_blk_index, sec_blk->getTag());
     }
 }
 

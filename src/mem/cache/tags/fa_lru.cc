@@ -54,6 +54,8 @@
 #include "base/logging.hh"
 #include "mem/cache/base.hh"
 #include "mem/cache/replacement_policies/replaceable_entry.hh"
+// #include "base/trace.hh"
+// #include "debug/Zcache.hh"
 
 namespace gem5
 {
@@ -89,13 +91,16 @@ FALRU::tagsInit()
     head = &(blks[0]);
     head->prev = nullptr;
     head->next = &(blks[1]);
-    head->setPosition(0, 0);
+    head->setPosition(0, 0, head->getTag());
+    // DPRINTF("Set position in fa_lru tagsInit for head with tag: %u\n", head->getTag());
     head->data = &dataBlks[0];
 
     for (unsigned i = 1; i < numBlocks - 1; i++) {
         blks[i].prev = &(blks[i-1]);
         blks[i].next = &(blks[i+1]);
-        blks[i].setPosition(0, i);
+        blks[i].setPosition(0, i, blks[i].getTag());
+        // DPRINTF("Set position in fa_lru tagsInit for body with tag: %u\n", blks[i].getTag());
+
 
         // Associate a data chunk to the block
         blks[i].data = &dataBlks[blkSize*i];
@@ -104,7 +109,8 @@ FALRU::tagsInit()
     tail = &(blks[numBlocks - 1]);
     tail->prev = &(blks[numBlocks - 2]);
     tail->next = nullptr;
-    tail->setPosition(0, numBlocks - 1);
+    tail->setPosition(0, numBlocks - 1, tail->getTag());
+    // DPRINTF("Set position in fa_lru tagsInit for tail with tag: %u\n", tail->getTag());
     tail->data = &dataBlks[(numBlocks - 1) * blkSize];
 
     cacheTracking.init(head, tail);

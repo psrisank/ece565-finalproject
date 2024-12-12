@@ -63,6 +63,9 @@
 #include "params/WriteAllocator.hh"
 #include "sim/cur_tick.hh"
 
+#include "base/trace.hh"
+#include "debug/Zcache.hh"
+
 namespace gem5
 {
 
@@ -181,6 +184,7 @@ BaseCache::CacheResponsePort::processSendRetry()
 Addr
 BaseCache::regenerateBlkAddr(CacheBlk* blk)
 {
+
     if (blk != tempBlock) {
         return tags->regenerateBlkAddr(blk);
     } else {
@@ -488,10 +492,12 @@ BaseCache::recvTimingResp(PacketPtr pkt)
 {
     assert(pkt->isResponse());
 
+    // DPRINTF(Zcache, "Response from memory: %s\n", pkt->print());
+
     // all header delay should be paid for by the crossbar, unless
     // this is a prefetch response from above
-    panic_if(pkt->headerDelay != 0 && pkt->cmd != MemCmd::HardPFResp,
-             "%s saw a non-zero packet delay\n", name());
+    // panic_if(pkt->headerDelay != 0 && pkt->cmd != MemCmd::HardPFResp,
+    //          "%s saw a non-zero packet delay\n", name());
 
     const bool is_error = pkt->isError();
 
@@ -502,6 +508,8 @@ BaseCache::recvTimingResp(PacketPtr pkt)
 
     DPRINTF(Cache, "%s: Handling response %s\n", __func__,
             pkt->print());
+    // DPRINTF(Zcache, "%s: Handling response %s\n", __func__,
+    //         pkt->print());
 
     // if this is a write, we should be looking at an uncacheable
     // write
@@ -544,12 +552,14 @@ BaseCache::recvTimingResp(PacketPtr pkt)
     // make sure that if the mshr was due to a whole line write then
     // the response is an invalidation
     assert(!mshr->wasWholeLineWrite || pkt->isInvalidate());
-
+    // DPRINTF(Zcache, "In recvTimingResp (from Memory or L2), address of the packet is: %x\n", pkt->getAddr());
     CacheBlk *blk = tags->findBlock(pkt->getAddr(), pkt->isSecure());
 
     if (is_fill && !is_error) {
         DPRINTF(Cache, "Block for addr %#llx being updated in Cache\n",
                 pkt->getAddr());
+        // DPRINTF(Zcache, "Block for addr %#llx being updated in Cache\n",
+                // pkt->getAddr());
 
         const bool allocate = (writeAllocator && mshr->wasWholeLineWrite) ?
             writeAllocator->allocate() : mshr->allocOnFill();
@@ -714,6 +724,7 @@ BaseCache::functionalAccess(PacketPtr pkt, bool from_cpu_side)
 {
     Addr blk_addr = pkt->getBlockAddr(blkSize);
     bool is_secure = pkt->isSecure();
+    // DPRINTF(Zcache, "In functionalAccess (from Memory or L2), address of the packet is: %x\n", pkt->getAddr());
     CacheBlk *blk = tags->findBlock(pkt->getAddr(), is_secure);
     MSHR *mshr = mshrQueue.findMatch(blk_addr, is_secure);
 
@@ -900,6 +911,7 @@ BaseCache::getNextQueueEntry()
         PacketPtr pkt = prefetcher->getPacket();
         if (pkt) {
             Addr pf_addr = pkt->getBlockAddr(blkSize);
+            // DPRINTF(Zcache, "In getNextQueueEntry (from Memory or L2), address of the packet is: %x\n", pkt->getAddr());
             if (tags->findBlock(pf_addr, pkt->isSecure())) {
                 DPRINTF(HWPrefetch, "Prefetch %#x has hit in cache, "
                         "dropped.\n", pf_addr);
@@ -1545,6 +1557,7 @@ BaseCache::handleFill(PacketPtr pkt, CacheBlk *blk, PacketList &writebacks,
     // Block is guaranteed to be valid at this point
     assert(blk->isValid());
     assert(blk->isSecure() == is_secure);
+
     assert(regenerateBlkAddr(blk) == addr);
 
     blk->setCoherenceBits(CacheBlk::ReadableBit);
@@ -1639,6 +1652,8 @@ BaseCache::allocateBlock(const PacketPtr pkt, PacketList &writebacks)
 
     // Print victim block's information
     DPRINTF(CacheRepl, "Replacement victim: %s\n", victim->print());
+
+    // Insert walk here
 
     // Try to evict blocks; if it fails, give up on allocation
     if (!handleEvictions(evict_blks, writebacks)) {
@@ -1894,6 +1909,7 @@ BaseCache::sendMSHRQueuePacket(MSHR* mshr)
         }
     }
 
+    // DPRINTF(Zcache, "In sendMSHRQueuePacket (from Memory or L2), address in the mshr is: %x\n", mshr->blkAddr);
     CacheBlk *blk = tags->findBlock(mshr->blkAddr, mshr->isSecure);
 
     // either a prefetch that is not present upstream, or a normal

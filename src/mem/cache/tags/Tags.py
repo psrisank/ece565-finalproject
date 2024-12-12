@@ -52,6 +52,7 @@ class BaseTags(ClockedObject):
 
     # Get the block size from the parent (system)
     block_size = Param.Int(Parent.cache_line_size, "block size in bytes")
+    # block_size = Param.Int(4, "block size in bytes")
 
     # Get the tag lookup latency from the parent (cache)
     tag_latency = Param.Cycles(Parent.tag_latency,
@@ -76,6 +77,18 @@ class BaseSetAssoc(BaseTags):
     type = 'BaseSetAssoc'
     cxx_header = "mem/cache/tags/base_set_assoc.hh"
     cxx_class = 'gem5::BaseSetAssoc'
+
+    # Get the cache associativity
+    assoc = Param.Int(Parent.assoc, "associativity")
+
+    # Get replacement policy from the parent (cache)
+    replacement_policy = Param.BaseReplacementPolicy(
+        Parent.replacement_policy, "Replacement policy")
+
+class ZcacheTags(BaseTags):
+    type = 'ZcacheTags'
+    cxx_header = "mem/cache/tags/zcache_tags.hh"
+    cxx_class = 'gem5::ZcacheTags'
 
     # Get the cache associativity
     assoc = Param.Int(Parent.assoc, "associativity")

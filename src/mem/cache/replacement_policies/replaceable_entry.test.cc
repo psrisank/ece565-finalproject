@@ -35,7 +35,8 @@ TEST(ReplaceableEntryTest, SetPosition)
 {
     ReplaceableEntry entry;
     uint32_t set = 10, way = 20;
-    entry.setPosition(set, way);
+    uint64_t address = 0xDEADBEEF;
+    entry.setPosition(set, way, address);
     ASSERT_EQ(entry.getSet(), set);
     ASSERT_EQ(entry.getWay(), way);
 }

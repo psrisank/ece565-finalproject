@@ -62,6 +62,11 @@
 #include "mem/packet.hh"
 #include "params/BaseSetAssoc.hh"
 
+
+
+#include "base/trace.hh"
+#include "debug/Zcache.hh"
+
 namespace gem5
 {
 
@@ -172,11 +177,14 @@ class BaseSetAssoc : public BaseTags
         // Get possible entries to be victimized
         const std::vector<ReplaceableEntry*> entries =
             indexingPolicy->getPossibleEntries(addr);
+        
 
         // Choose replacement victim from replacement candidates
         CacheBlk* victim = static_cast<CacheBlk*>(replacementPolicy->getVictim(
                                 entries));
 
+
+        // DPRINTF(Zcache, "Victim's address, tag in L1 cache is: %x\n", victim->getTag());
         // There is only one eviction for this replacement
         evict_blks.push_back(victim);
 

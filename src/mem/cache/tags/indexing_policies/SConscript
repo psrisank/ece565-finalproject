@@ -33,5 +33,4 @@ SimObject('IndexingPolicies.py', sim_objects=[
 Source('base.cc')
 Source('set_associative.cc')
 Source('skewed_associative.cc')
-# Source('zcache_associative.cc')
 Source('zcache.cc')

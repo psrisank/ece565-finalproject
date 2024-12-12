@@ -48,7 +48,7 @@ AssociativeSet<Entry>::AssociativeSet(int assoc, int num_entries,
              "must be a power of 2");
     for (unsigned int entry_idx = 0; entry_idx < numEntries; entry_idx += 1) {
         Entry* entry = &entries[entry_idx];
-        indexingPolicy->setEntry(entry, entry_idx);
+        indexingPolicy->setEntry(entry, entry_idx, entry->getTag());
         entry->replacementData = replacementPolicy->instantiateEntry();
     }
 }

@@ -48,6 +48,7 @@
 
 #include "mem/cache/replacement_policies/replaceable_entry.hh"
 
+
 namespace gem5
 {
 
