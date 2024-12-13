@@ -1,6 +1,6 @@
 #!/bin/bash
 
-benches=("mcf_s" "lbm_s" "cactuBSSN_s" "pop2_s" "cam4_s")
+benches=("mcf_s" "lbm_s" "cactuBSSN_s" "cam4_s")
 
 filename="Zcache_Benchmarks.log"
 
@@ -13,6 +13,7 @@ for benchmark in "${benches[@]}"; do
     echo "----------------------------------" >> $filename
 
     ./build/ECE565-X86/gem5.fast configs/spec/spec_se.py -b $benchmark  -F=200000000 --maxinsts=700000000 --l2cache --caches --cpu-type=TimingSimpleCPU  --l1d_size=24kB --l1i_size=32kB --l2_size=512kB --l1d_assoc=6 --l1i_assoc=8 --l2_assoc=8
+    ./build/ECE565-X86/gem5.fast configs/spec/spec_se.py -b omnetpp_s -F=200000000 --maxinsts=700000000 --l2cache --caches --cpu-type=TimingSimpleCPU  --l1d_size=24kB --l1i_size=32kB --l2_size=512kB --l1d_assoc=6 --l1i_assoc=8 --l2_assoc=8
     wait
     grep "l2.overallMissRate::total" m5out/stats.txt >> $filename
     grep "numInsts" m5out/stats.txt >> $filename

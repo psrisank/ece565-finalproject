@@ -227,6 +227,8 @@ class ZcacheTags : public BaseTags
             std::swap(victim, victimParent);
             evict_blks.push_back(victim);
             return victim;
+            // evict_blks.push_back(victimParent);
+            // return victimParent;
         }
         else {
             evict_blks.push_back(victim);
